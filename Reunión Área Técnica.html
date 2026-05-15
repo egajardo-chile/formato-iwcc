@@ -1,0 +1,1285 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>IWCC · Reunión Área Técnica · 21 Abril 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="deck-stage.js"></script>
+<script src="image-slot.js"></script>
+<style>
+  :root {
+    --ink:        #1A1A1A;
+    --ink-soft:   #2A2A2A;
+    --copper:     #AE5F00;
+    --copper-deep:#8A4A00;
+    --copper-tint:#C87A26;
+    --cream:      #E0D5C8;
+    --cream-soft: #EBE2D6;
+    --paper:      #F8F4EF;
+    --slate:      #36454F;
+    --slate-soft: #5A6772;
+    --white:      #FFFFFF;
+    --good:       #2F7D4F;
+    --warn:       #C8941A;
+    --bad:        #B43E2E;
+    --rule:       rgba(26,26,26,0.12);
+
+    --serif: "Cormorant Garamond", "Calisto MT", Georgia, serif;
+    --sans:  "IBM Plex Sans", system-ui, sans-serif;
+    --mono:  "IBM Plex Mono", ui-monospace, monospace;
+
+    --type-display: 132px;
+    --type-mega:    104px;
+    --type-title:   72px;
+    --type-subtitle:44px;
+    --type-body:    30px;
+    --type-small:   26px;
+    --type-label:   24px;
+    --type-micro:   22px;
+
+    --pad-x: 110px;
+    --pad-y: 90px;
+    --gap-section: 56px;
+    --gap-item: 28px;
+  }
+
+  html, body { margin: 0; padding: 0; background: #0a0a0a; }
+  body { font-family: var(--sans); color: var(--ink); font-weight: 400; }
+
+  deck-stage section {
+    background: var(--paper);
+    color: var(--ink);
+    overflow: hidden;
+    position: relative;
+    font-family: var(--sans);
+    font-size: var(--type-body);
+    line-height: 1.35;
+  }
+
+  /* ===== Helpers ===== */
+  .frame { position: absolute; inset: 0; padding: var(--pad-y) var(--pad-x); display: flex; flex-direction: column; }
+  .flex { display: flex; }
+  .col { display: flex; flex-direction: column; }
+  .between { justify-content: space-between; }
+  .center { align-items: center; }
+  .gap-s { gap: 16px; } .gap-m { gap: 28px; } .gap-l { gap: 48px; } .gap-xl { gap: 72px; }
+
+  .serif { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; }
+  .italic { font-style: italic; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .label {
+    font-family: var(--sans);
+    font-size: var(--type-label);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .label.ink { color: var(--ink-soft); }
+  .label.slate { color: var(--slate-soft); }
+  .eyebrow {
+    display: flex; align-items: center; gap: 18px;
+    font-family: var(--sans); font-size: var(--type-label);
+    font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--copper);
+  }
+  .eyebrow .bar { display: inline-block; width: 56px; height: 2px; background: var(--copper); }
+
+  .h-rule { height: 1px; background: var(--rule); }
+  .h-rule.copper { background: var(--copper); height: 2px; }
+
+  /* ===== Brand chrome ===== */
+  .brand-row {
+    position: absolute; top: 48px; left: var(--pad-x); right: var(--pad-x);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: var(--type-micro); letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--slate-soft);
+    z-index: 5;
+  }
+  .brand-row .iwcc {
+    font-family: var(--serif); font-style: normal; font-size: 28px;
+    letter-spacing: 0.36em; color: var(--ink); font-weight: 600;
+  }
+  .brand-row .iwcc small {
+    display: block; font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.42em; margin-top: 2px; color: var(--slate-soft); font-weight: 500;
+  }
+  .foot-row {
+    position: absolute; bottom: 46px; left: var(--pad-x); right: var(--pad-x);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: var(--type-micro); letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--slate-soft);
+    z-index: 5;
+  }
+  .foot-row .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--copper); display: inline-block; margin: 0 14px 3px; }
+
+  /* ===== Slide variants ===== */
+  .dark { background: var(--ink); color: var(--paper); }
+  .dark .brand-row, .dark .foot-row { color: rgba(248,244,239,0.6); }
+  .dark .brand-row .iwcc { color: var(--paper); }
+  .dark .brand-row .iwcc small { color: rgba(248,244,239,0.55); }
+  .dark .label, .dark .eyebrow { color: var(--copper-tint); }
+  .dark .eyebrow .bar { background: var(--copper-tint); }
+
+  .cream { background: var(--cream-soft); }
+  .ink-slab { background: var(--ink); color: var(--paper); }
+
+  /* ===== Cover ===== */
+  .cover-full {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    color: var(--paper);
+  }
+  .cover-full .bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+    filter: brightness(0.95) saturate(1.08) contrast(1.04);
+  }
+  .cover-full .scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(20,14,8,0.35) 0%, rgba(20,14,8,0.05) 22%, rgba(20,14,8,0.15) 55%, rgba(20,14,8,0.82) 100%),
+      linear-gradient(90deg, rgba(20,14,8,0.35) 0%, transparent 45%, transparent 100%);
+  }
+  .cover-full .content {
+    position: absolute; inset: 0; z-index: 2;
+    padding: 80px var(--pad-x) 88px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cover-full .top-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .cover-full .mark {
+    font-family: var(--serif); font-size: 44px; letter-spacing: 0.36em; font-weight: 600; color: var(--paper);
+    line-height: 1;
+  }
+  .cover-full .mark small {
+    display: block; font-family: var(--sans); font-size: 16px; letter-spacing: 0.5em; margin-top: 10px;
+    color: rgba(248,244,239,0.75); font-weight: 500;
+  }
+  .cover-full .tag {
+    text-align: right; font-family: var(--sans); font-size: 24px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: rgba(248,244,239,0.85);
+  }
+  .cover-full .tag b { color: var(--copper-tint); font-weight: 600; }
+  .cover-full .center-block { display: flex; flex-direction: column; gap: 28px; max-width: 1500px; }
+  .cover-full .eyebrow-cov {
+    display: inline-flex; align-items: center; gap: 18px; font-family: var(--sans);
+    font-size: 24px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--copper-tint);
+  }
+  .cover-full .eyebrow-cov .bar { display: inline-block; width: 80px; height: 2px; background: var(--copper-tint); }
+  .cover-full .ct {
+    font-family: var(--serif); font-size: 170px; line-height: 0.92; font-weight: 500; letter-spacing: -0.018em;
+    margin: 0; color: var(--paper);
+    text-shadow: 0 6px 36px rgba(0,0,0,0.7), 0 2px 12px rgba(0,0,0,0.55);
+  }
+  .cover-full .ct em { color: var(--copper-tint); font-style: italic; font-weight: 500; }
+  .cover-full .bottom-row {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 80px;
+  }
+  .cover-full .who {
+    color: rgba(248,244,239,0.92); font-size: 26px; line-height: 1.4; letter-spacing: 0.02em; max-width: 780px;
+  }
+  .cover-full .who b { color: var(--copper-tint); font-weight: 600; }
+  .cover-full .when {
+    font-family: var(--serif); font-size: 64px; font-weight: 600; color: var(--paper); line-height: 1;
+    display: inline-flex; align-items: baseline; gap: 16px;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+  }
+  .cover-full .when em { font-style: italic; color: var(--copper-tint); font-weight: 500; font-size: 44px; }
+
+  /* ===== Agenda ===== */
+  .agenda-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 110px; row-gap: 36px;
+    margin-top: 60px;
+  }
+  .agenda-item {
+    display: grid; grid-template-columns: 96px 1fr; gap: 28px; align-items: start;
+    padding: 24px 0; border-top: 1px solid var(--rule);
+  }
+  .agenda-item .num {
+    font-family: var(--serif); font-size: 64px; line-height: 1; color: var(--copper); font-weight: 500; font-style: italic;
+  }
+  .agenda-item h3 {
+    margin: 6px 0 6px; font-family: var(--serif); font-weight: 500; font-size: 36px; line-height: 1.1; color: var(--ink);
+  }
+  .agenda-item p {
+    margin: 0; font-size: 24px; color: var(--slate-soft); line-height: 1.35;
+  }
+
+  /* ===== Section divider ===== */
+  .section-divider { display: grid; grid-template-columns: 1.15fr 1fr; height: 100%; }
+  .section-divider .pane-l {
+    padding: var(--pad-y) var(--pad-x);
+    display: flex; flex-direction: column; justify-content: center; gap: 28px;
+    position: relative;
+  }
+  .section-divider .big-num {
+    font-family: var(--serif); font-size: 280px; line-height: 1; color: var(--copper);
+    font-weight: 500; letter-spacing: -0.02em; margin: 30px 0 0;
+  }
+  .section-divider .big-num .slash { display: none; }
+  .section-divider h2 {
+    margin: 0; font-family: var(--serif); font-size: 88px; line-height: 0.98;
+    font-weight: 500; letter-spacing: -0.015em; color: var(--ink);
+  }
+  .section-divider .sub { font-size: 28px; color: var(--slate-soft); max-width: 720px; line-height: 1.4; }
+  .section-divider .pane-r { background: var(--ink); position: relative; overflow: hidden; }
+  .section-divider .pane-r image-slot { position: absolute; inset: 0; width: 100%; height: 100%; --is-radius: 0; }
+  .section-divider .pane-r .veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(26,26,26,0.25) 0%, rgba(26,26,26,0.55) 100%);
+    pointer-events: none;
+  }
+  .section-divider .pane-r .corner-mark {
+    position: absolute; left: 60px; bottom: 60px; color: rgba(248,244,239,0.85);
+    font-family: var(--serif); font-style: italic; font-size: 28px;
+  }
+
+  /* ===== Title cap (content slides) ===== */
+  .cap { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; }
+  .cap h1 {
+    margin: 0; font-family: var(--serif); font-weight: 500; letter-spacing: -0.012em;
+    font-size: 76px; line-height: 1.02; color: var(--ink);
+  }
+  .cap h1 em { font-style: italic; color: var(--copper); }
+  .cap .lede { font-size: 26px; color: var(--slate-soft); max-width: 1100px; line-height: 1.4; }
+
+  /* ===== Stat cards ===== */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .stat {
+    background: var(--white); border: 1px solid var(--rule);
+    padding: 32px 32px 30px;
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative;
+  }
+  .stat::before {
+    content:""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--copper);
+  }
+  .stat .k { font-family: var(--serif); font-size: 84px; line-height: 0.95; font-weight: 600; color: var(--ink); letter-spacing: -0.02em; }
+  .stat .k.copper { color: var(--copper); }
+  .stat .v { font-size: 22px; color: var(--slate-soft); line-height: 1.35; }
+  .stat .l { font-size: 16px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper); font-weight: 600; }
+
+  /* ===== Tables ===== */
+  table.data {
+    width: 100%; border-collapse: collapse; font-size: 22px; font-family: var(--sans);
+  }
+  table.data th {
+    text-align: left; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 14px; color: var(--slate-soft); padding: 12px 12px 10px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  table.data td {
+    padding: 11px 12px; border-bottom: 1px solid var(--rule); color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  table.data tr.total td {
+    border-top: 1.5px solid var(--ink); border-bottom: none;
+    font-weight: 600; color: var(--ink); padding-top: 16px;
+  }
+  table.data td.num { text-align: right; }
+  table.data td.copper { color: var(--copper); font-weight: 600; }
+
+  /* Pills */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px; font-size: 16px;
+    font-weight: 600; letter-spacing: 0.06em;
+  }
+  .pill.good { background: rgba(47,125,79,0.12); color: var(--good); }
+  .pill.warn { background: rgba(200,148,26,0.16); color: #8a6510; }
+  .pill.bad  { background: rgba(180,62,46,0.12); color: var(--bad); }
+  .pill.ink  { background: var(--ink); color: var(--paper); }
+  .pill.copper { background: var(--copper); color: var(--paper); }
+  .pill.outline { background: transparent; border: 1.5px solid var(--rule); color: var(--ink-soft); }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+  /* ===== Roadmap timeline ===== */
+  .timeline {
+    display: grid; grid-template-columns: 220px repeat(10, 1fr); gap: 8px;
+    align-items: stretch; margin-top: 8px;
+  }
+  .timeline .months { display: contents; }
+  .timeline .month {
+    font-size: 17px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate-soft);
+    padding: 14px 8px; border-bottom: 1.5px solid var(--ink); text-align: center; font-weight: 600;
+  }
+  .timeline .month.today { color: var(--copper); position: relative; }
+  .timeline .month.today::after {
+    content: "HOY"; position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+    font-size: 14px; letter-spacing: 0.3em; color: var(--copper); font-weight: 700;
+  }
+  .timeline .row-label {
+    padding: 22px 12px 22px 0; font-family: var(--serif); font-size: 26px; font-style: italic; color: var(--ink);
+    border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px;
+    line-height: 1.1;
+  }
+  .timeline .row-label small { font-family: var(--sans); font-style: normal; font-size: 14px; letter-spacing: 0.18em; color: var(--slate-soft); font-weight: 600; text-transform: uppercase; }
+  .timeline .cell {
+    border-bottom: 1px solid var(--rule); position: relative;
+  }
+  .timeline .bar {
+    position: absolute; left: 4px; right: 4px; top: 18px; bottom: 18px;
+    background: var(--copper); color: var(--paper);
+    display: flex; align-items: center; justify-content: center; padding: 0 14px;
+    font-size: 15px; font-weight: 600; letter-spacing: 0.04em;
+  }
+  .timeline .bar.ind { background: var(--copper); }
+  .timeline .bar.sta { background: var(--slate); }
+  .timeline .bar.env { background: var(--cream); color: var(--ink); }
+  .timeline .bar.prod { background: var(--ink); color: var(--paper); }
+  .timeline .today-line {
+    grid-column: span 1; position: relative;
+  }
+  .timeline .today-line::before {
+    content:""; position: absolute; left: 50%; top: -10px; bottom: -10px; width: 2px;
+    background: var(--copper); z-index: 3;
+  }
+
+  /* ===== Closing ===== */
+  .end-grid { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+  .end-pane { padding: var(--pad-y) var(--pad-x); display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+  .end-pane h1 {
+    margin: 0; font-family: var(--serif); font-size: 220px; font-weight: 500; line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .end-pane h1 em { font-style: italic; color: var(--copper); }
+
+  /* ===== Legends / chips ===== */
+  .legend { display: flex; gap: 20px; flex-wrap: wrap; font-size: 17px; color: var(--slate-soft); }
+  .legend .sw { width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 8px; }
+
+  /* Decorative line drawing - grapes */
+  .deco-grape {
+    position: absolute; right: -120px; bottom: -140px; width: 720px; height: 720px; opacity: 0.06; pointer-events: none;
+  }
+
+  /* image-slot tuning */
+  image-slot {
+    --is-placeholder-bg: rgba(0,0,0,0.18);
+    --is-placeholder-fg: rgba(255,255,255,0.7);
+    --is-placeholder-font: var(--serif);
+  }
+  /* Photo treatment */
+  img.photo {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  /* Matriz */
+  .matriz {
+    width: 100%; border-collapse: separate; border-spacing: 0; font-size: 21px;
+  }
+  .matriz th, .matriz td { padding: 13px 16px; }
+  .matriz thead th {
+    font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--slate-soft);
+    border-bottom: 1.5px solid var(--ink); text-align: center;
+  }
+  .matriz thead th.crit { text-align: left; color: var(--ink); }
+  .matriz tbody td { border-bottom: 1px solid var(--rule); text-align: center; }
+  .matriz tbody td.crit { text-align: left; font-weight: 500; color: var(--ink); font-family: var(--serif); font-size: 24px; }
+  .cell-good { background: rgba(47,125,79,0.10); color: var(--good); font-weight: 600; }
+  .cell-warn { background: rgba(200,148,26,0.14); color: #8a6510; font-weight: 600; }
+  .cell-bad  { background: rgba(180,62,46,0.10); color: var(--bad); font-weight: 600; }
+
+  /* Roadmap horizontal */
+  .ruta {
+    position: relative; padding: 60px 40px 30px; margin-top: 24px;
+  }
+  .ruta::before {
+    content:""; position: absolute; left: 40px; right: 40px; top: 50%; height: 2px; background: var(--copper); opacity: 0.4;
+  }
+  .ruta-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; position: relative; }
+  .ruta-step {
+    display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative;
+    padding-top: 90px;
+  }
+  .ruta-step::before {
+    content:""; position: absolute; top: 36px; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 22px; border-radius: 50%; background: var(--copper);
+    box-shadow: 0 0 0 6px var(--paper), 0 0 0 8px var(--copper);
+  }
+  .ruta-step.green::before { background: var(--good); box-shadow: 0 0 0 6px var(--paper), 0 0 0 8px var(--good); }
+  .ruta-step.slate::before { background: var(--slate); box-shadow: 0 0 0 6px var(--paper), 0 0 0 8px var(--slate); }
+  .ruta-step .when {
+    font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--copper); line-height: 1; font-weight: 600;
+  }
+  .ruta-step.green .when { color: var(--good); }
+  .ruta-step.slate .when { color: var(--slate); }
+  .ruta-step .what {
+    text-align: center; font-size: 20px; color: var(--ink); line-height: 1.3;
+  }
+  .ruta-step .what b { font-weight: 600; color: var(--ink); }
+
+  /* Iniciativas */
+  .ini-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; }
+  .ini {
+    background: var(--white); border: 1px solid var(--rule); padding: 36px 34px;
+    display: flex; flex-direction: column; gap: 18px; position: relative;
+  }
+  .ini .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .ini .num {
+    font-family: var(--serif); font-size: 80px; font-weight: 600; color: var(--copper);
+    line-height: 0.9; letter-spacing: -0.02em;
+  }
+  .ini h3 {
+    margin: 0; font-family: var(--serif); font-weight: 500; font-size: 34px; line-height: 1.1; color: var(--ink);
+  }
+  .ini ul { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .ini li { font-size: 19px; color: var(--ink-soft); line-height: 1.35; padding-left: 18px; position: relative; }
+  .ini li::before {
+    content:""; position: absolute; left: 0; top: 11px; width: 8px; height: 1.5px; background: var(--copper);
+  }
+  .ini .meta {
+    margin-top: auto; padding-top: 18px; border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center; font-size: 16px; color: var(--slate-soft);
+  }
+  .ini .meta b { color: var(--ink); font-weight: 600; }
+
+  /* Bars chart */
+  .bars { display: flex; align-items: flex-end; gap: 18px; height: 280px; padding-top: 30px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .bar-col .b {
+    width: 100%; background: var(--copper); position: relative; min-height: 4px;
+    display: flex; align-items: flex-start; justify-content: center; padding-top: 8px;
+    color: var(--paper); font-weight: 700; font-size: 17px;
+  }
+  .bar-col .b.alt { background: var(--slate); }
+  .bar-col .b.muted { background: var(--cream); color: var(--ink); }
+  .bar-col .lbl { font-size: 16px; color: var(--slate-soft); text-align: center; line-height: 1.2; }
+  .bar-col .lbl b { color: var(--ink); }
+
+  /* IWCC logo SVG-like text */
+  .iwcc-mark {
+    font-family: var(--serif); letter-spacing: 0.32em; color: currentColor; font-weight: 500;
+    display: inline-flex; flex-direction: column; line-height: 1;
+  }
+  .iwcc-mark .big { font-size: 60px; }
+  .iwcc-mark small { font-family: var(--sans); font-size: 14px; letter-spacing: 0.42em; margin-top: 8px; font-weight: 500; }
+
+  /* page-num corner */
+  .pageno {
+    position: absolute; right: var(--pad-x); bottom: 48px;
+    font-family: var(--mono); font-size: 16px; letter-spacing: 0.2em; color: var(--slate-soft);
+  }
+
+  /* Big stat */
+  .megastat { display: flex; flex-direction: column; gap: 30px; }
+  .megastat .k {
+    font-family: var(--serif); font-size: 320px; line-height: 1; color: var(--copper);
+    font-weight: 500; letter-spacing: -0.025em;
+  }
+  .megastat .k em { font-style: italic; }
+  .megastat .v {
+    font-family: var(--serif); font-size: 56px; line-height: 1.15; color: var(--ink); font-weight: 500; max-width: 1100px;
+    margin-top: 30px;
+  }
+  .megastat .e { font-size: 26px; color: var(--slate-soft); max-width: 900px; }
+
+  /* Brasil/Chile bg accents */
+  .accent-tile { position: absolute; right: 0; top: 0; bottom: 0; width: 36%; background: var(--ink); }
+
+  /* image-slot adjustments */
+  image-slot[data-shape="circle"] { border-radius: 50%; }
+
+  /* org chart container */
+  .org-wrap {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    background: var(--white); border: 1px solid var(--rule); padding: 30px;
+  }
+  .org-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  /* Tasación cards */
+  .tas-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .tas-card {
+    background: var(--white); border: 1px solid var(--rule); padding: 32px 30px;
+    display: flex; flex-direction: column; gap: 18px;
+    position: relative;
+  }
+  .tas-card.featured { background: var(--ink); color: var(--paper); }
+  .tas-card.featured .label { color: var(--copper-tint); }
+  .tas-card.featured .v { color: var(--paper); }
+  .tas-card .name { font-family: var(--serif); font-size: 32px; font-weight: 600; }
+  .tas-card .total { font-family: var(--serif); font-size: 72px; font-weight: 600; line-height: 0.9; color: var(--copper); }
+  .tas-card.featured .total { color: var(--copper-tint); }
+  .tas-card .breakdown { display: flex; flex-direction: column; gap: 8px; font-size: 18px; }
+  .tas-card .breakdown .row { display: flex; justify-content: space-between; }
+  .tas-card .breakdown .row span:first-child { color: var(--slate-soft); }
+  .tas-card.featured .breakdown .row span:first-child { color: rgba(248,244,239,0.65); }
+</style>
+</head>
+<body>
+
+<script type="application/json" id="speaker-notes">
+[]
+</script>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============== 01 · COVER ============== -->
+  <section data-label="01 Portada">
+    <div class="cover-full">
+      <img class="bg" src="photos/autumn-vineyard.jpeg" alt="" />
+      <div class="scrim"></div>
+      <div class="content">
+        <div class="top-row">
+          <div class="mark">IWCC<small>WINE COMPANY CHILE</small></div>
+          <div class="tag">Indómita &nbsp;·&nbsp; <b>21 Abril 2026</b></div>
+        </div>
+
+        <div class="center-block">
+          <div class="eyebrow-cov"><span class="bar"></span>Reunión — Área Técnica</div>
+          <h1 class="ct">Reunión<br/><em>Área Técnica</em></h1>
+        </div>
+
+        <div class="bottom-row">
+          <div class="who">
+            <b>Asistentes —</b> &nbsp; Gerente General &nbsp;·&nbsp; Gerente Área Técnica<br/>
+            <span style="font-size:24px; color: rgba(248,244,239,0.65); letter-spacing: 0.04em;">Casablanca · Pirque · Viña Indómita</span>
+          </div>
+          <div class="when">21 <em>de Abril</em> 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 02 · AGENDA ============== -->
+  <section data-label="02 Agenda">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Indómita · 21 Abril 2026</div>
+    </div>
+    <div class="frame" style="padding-top: 150px; padding-bottom: 110px;">
+      <div class="eyebrow"><span class="bar"></span>Reunión Área Técnica</div>
+      <h1 class="serif" style="font-size: 110px; margin: 18px 0 0; line-height: 0.95; font-weight: 500; letter-spacing: -0.012em;">Agenda</h1>
+
+      <div class="agenda-grid">
+        <div class="agenda-item">
+          <div class="num">01</div>
+          <div>
+            <h3>Auditoría Fair Trade</h3>
+            <p>Estado, hallazgos y plan de cierre</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="num">02</div>
+          <div>
+            <h3>Benchmark Vinos Zero · Cotización Changyu Sinzero</h3>
+            <p>Posicionamiento competitivo y propuesta comercial</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="num">03</div>
+          <div>
+            <h3>Respuesta El Rosal</h3>
+            <p>Línea de respuesta formal acordada</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="num">04</div>
+          <div>
+            <h3>Propuesta Organigrama Enología</h3>
+            <p>Optimización Casablanca–Pirque · 31 personas</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="num">05</div>
+          <div>
+            <h3>Contaminación Zygosaccharomyces · vinos dulces</h3>
+            <p>Diagnóstico, riesgo y contención</p>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="num">06</div>
+          <div>
+            <h3>CNR · Subsecretario de Agricultura</h3>
+            <p>Coordinación y temas en agenda</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-row"><span>01 · Agenda</span><span>Indómita Wine Company Chile<span class="dot"></span>2026</span></div>
+  </section>
+
+  <!-- ============== 03 · SECTION 02 ============== -->
+  <section data-label="03 Sección Timeline" class="dark">
+    <div class="section-divider">
+      <div class="pane-l">
+        <div class="eyebrow" style="color:var(--copper-tint);"><span class="bar" style="background:var(--copper-tint);"></span>Capítulo 02</div>
+        <div class="big-num" style="color:var(--copper-tint);">02<span class="slash" style="color:rgba(248,244,239,0.18);">/</span></div>
+        <h2 style="color: var(--paper);">Timeline<br/><em style="font-style:italic;color:var(--copper-tint);font-weight:500;">Productos Nuevos</em></h2>
+        <div class="sub" style="color: rgba(248,244,239,0.7);">Estado de desarrollo, hitos clave y ventana de envasado · roadmap 2026–2027 para la nueva gama IWCC.</div>
+      </div>
+      <div class="pane-r">
+        <img class="photo" src="photos/winery-side.jpeg" alt="" />
+        <div class="veil"></div>
+        <div class="corner-mark">Nueva Gama · IWCC</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 04 · ROADMAP TIMELINE ============== -->
+  <section data-label="04 Roadmap 2026-2027">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>02 · Timeline Productos Nuevos</div>
+    </div>
+    <div class="frame" style="padding-top: 140px;">
+      <div class="cap">
+        <div class="eyebrow"><span class="bar"></span>03 / Roadmap 2026–2027</div>
+        <h1>Nueva Gama de <em>Productos</em></h1>
+        <div class="lede">Ventanas de envasado, producción comercial y lanzamiento por línea — referencia <b>Marzo a Diciembre 2026</b>, con hitos extendidos a 2027.</div>
+      </div>
+
+      <div class="timeline">
+        <div class="month"></div>
+        <div class="month">Mar</div><div class="month">Abr</div><div class="month today">May</div>
+        <div class="month">Jun</div><div class="month">Jul</div><div class="month">Ago</div>
+        <div class="month">Sep</div><div class="month">Oct</div><div class="month">Nov</div><div class="month">Dic</div>
+
+        <div class="row-label">Esp. Zero° A<small>IND · Envasado</small></div>
+        <div class="cell"></div><div class="cell"><div class="bar env">Envasado</div></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+        <div class="row-label">Esp. 5° Frizzante<small>IND · Envasado</small></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"><div class="bar env">Envasado</div></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+        <div class="row-label">Spritz 5° Botella<small>STA · Envasado</small></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"><div class="bar sta">Envasado</div></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+        <div class="row-label">Tranquilo Zero° SB C<small>IND · Producción comercial</small></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"><div class="bar prod">Producción comercial</div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+        <div class="row-label">Spritz 0° 330cc<small>IND · Producción comercial</small></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"><div class="bar prod">Producción comercial</div></div><div class="cell"></div><div class="cell"></div>
+      </div>
+
+      <div class="legend" style="margin-top: 36px; font-size: 20px; padding-bottom: 0;">
+        <span><span class="sw" style="background:var(--cream);"></span>Envasado IND</span>
+        <span><span class="sw" style="background:var(--slate);"></span>Envasado STA</span>
+        <span><span class="sw" style="background:var(--ink);"></span>Producción comercial</span>
+        <span><span class="sw" style="background:var(--copper);"></span>Línea de Hoy</span>
+      </div>
+    </div>
+    <div class="foot-row" style="bottom: 36px;"><span>04 · Roadmap</span><span>IWCC<span class="dot"></span>Nueva Gama de Productos</span></div>
+  </section>
+
+  <!-- ============== 05 · SECTION 03 — ENOLOGÍA ============== -->
+  <section data-label="05 Sección Organigrama">
+    <div class="section-divider">
+      <div class="pane-l" style="background: var(--cream-soft);">
+        <div class="eyebrow"><span class="bar"></span>Capítulo 03</div>
+        <div class="big-num">03<span class="slash">/</span></div>
+        <h2>Cambio<br/><em style="font-style:italic;color:var(--copper);font-weight:500;">Organizacional</em><br/>Enólogos</h2>
+        <div class="sub">Propuesta para optimizar la gestión técnica y la cobertura operacional entre Casablanca y Pirque.</div>
+      </div>
+      <div class="pane-r">
+        <img class="photo" src="photos/workers.jpeg" alt="" />
+        <div class="veil"></div>
+        <div class="corner-mark">Área Enología · 31 personas</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 06 · ORGANIGRAMA ============== -->
+  <section data-label="06 Organigrama Enología">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>03 · Propuesta Organigrama</div>
+    </div>
+    <div class="frame" style="padding-top: 140px;">
+      <div class="cap" style="margin-bottom: 32px;">
+        <div class="eyebrow"><span class="bar"></span>Gerencia Técnica · Enología · Pirque</div>
+        <h1>Organigrama <em>Propuesto</em></h1>
+        <div class="lede"><b style="color:var(--ink);">Objetivo:</b> optimizar la gestión técnica y la cobertura operacional entre Casablanca y Pirque · 31 personas en el área.</div>
+      </div>
+      <div class="org-wrap"><img src="images/image3.png" alt="Organigrama Área Enología" /></div>
+    </div>
+    <div class="foot-row"><span>06 · Organigrama</span><span>Optimización Casablanca–Pirque</span></div>
+  </section>
+
+  <!-- ============== 07 · SECTION BRASIL ============== -->
+  <section data-label="07 Sección Brasil" class="dark">
+    <div class="section-divider">
+      <div class="pane-l">
+        <div class="eyebrow" style="color:var(--copper-tint);"><span class="bar" style="background:var(--copper-tint);"></span>Capítulo 07</div>
+        <div class="big-num" style="color:var(--copper-tint);">07<span class="slash" style="color:rgba(248,244,239,0.18);">/</span></div>
+        <h2 style="color: var(--paper);">Brasil<br/><em style="font-style:italic;color:var(--copper-tint);font-weight:500;">Análisis Profundo</em></h2>
+        <div class="sub" style="color: rgba(248,244,239,0.7);">Mayor mercado No-Alcohólico de LATAM · regulación, demanda y oportunidad IWCC.</div>
+      </div>
+      <div class="pane-r" style="background: linear-gradient(180deg,#1d3a1f,#0e2210);">
+        <img class="photo" src="photos/dusk.jpeg" alt="" />
+        <div class="veil"></div>
+        <div class="corner-mark" style="color:#dfd1c0;">São Paulo · Rio · Belo Horizonte</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 08 · BRASIL DATOS ============== -->
+  <section data-label="08 Brasil Datos">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Brasil · Mercado, Regulación y Oportunidad</div>
+    </div>
+    <div class="frame" style="padding-top: 140px;">
+      <div class="cap">
+        <div class="eyebrow"><span class="bar"></span>Mercado · Regulación · Oportunidad</div>
+        <h1>Brasil — <em>el mayor mercado NA</em> de LATAM</h1>
+      </div>
+
+      <div class="stat-row" style="margin-bottom: 48px;">
+        <div class="stat">
+          <div class="l">CAGR NA 2024–2028</div>
+          <div class="k copper">+10<span style="font-size:54px;">%</span></div>
+          <div class="v">Fuente IWSR · proyección quinquenal.</div>
+        </div>
+        <div class="stat">
+          <div class="l">Nuevos consumidores</div>
+          <div class="k">+13<span style="font-size:54px;">M</span></div>
+          <div class="v">Sumados al segmento NA entre 2022–2024.</div>
+        </div>
+        <div class="stat">
+          <div class="l">Posición en LATAM</div>
+          <div class="k">#1</div>
+          <div class="v">Mayor mercado NA de la región.</div>
+        </div>
+        <div class="stat">
+          <div class="l">Dominio Cerveza NA</div>
+          <div class="k">~80<span style="font-size:54px;">%</span></div>
+          <div class="v">Del segmento NA total · cerveza líder.</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1.1fr; gap: 48px;">
+        <div>
+          <div class="label">Bebidas NA Brasil · Distribución 2024</div>
+          <div class="bars">
+            <div class="bar-col"><div class="b" style="height: 240px;">72%</div><div class="lbl"><b>Cerveza</b><br/>NA</div></div>
+            <div class="bar-col"><div class="b alt" style="height: 56px;">16%</div><div class="lbl"><b>RTD</b><br/>NA</div></div>
+            <div class="bar-col"><div class="b" style="height: 28px; background:var(--copper);">8%</div><div class="lbl"><b>Vino</b><br/>NA</div></div>
+            <div class="bar-col"><div class="b muted" style="height: 16px;">4%</div><div class="lbl"><b>Spirits</b><br/>NA</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="label">Brasil · Datos Clave para IWCC</div>
+          <table class="data" style="margin-top: 12px;">
+            <tbody>
+              <tr><td style="width:38%;">Denominación legal</td><td>"Fermentado de uva desalcoholizado"</td></tr>
+              <tr><td>Restricción clave</td><td>No puede llamarse "vino" en etiqueta</td></tr>
+              <tr><td>Canal de entrada</td><td>E-commerce + importador Interfood</td></tr>
+              <tr><td>Perfil consumidor</td><td>Mujer 25–40 · MBA · urbanita · salud-consciente</td></tr>
+              <tr class="total"><td>Marco regulatorio</td><td class="copper">MAPA Brasil · IN 14/2018</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px; font-size: 18px; color: var(--slate-soft); letter-spacing: 0.04em;">
+        Fuentes: IWSR Brazil 2024 · Innovamarketinsights.com · Tendencias Bebidas LATAM 2025 · MAPA Brasil IN 14/2018
+      </div>
+    </div>
+    <div class="foot-row" style="bottom: 32px;"><span>08 · Brasil</span><span>Mayor mercado NA de LATAM</span></div>
+  </section>
+
+  <!-- ============== 09 · SECTION CHILE ============== -->
+  <section data-label="09 Sección Chile">
+    <div class="section-divider">
+      <div class="pane-l" style="background: var(--paper);">
+        <div class="eyebrow"><span class="bar"></span>Capítulo 08</div>
+        <div class="big-num">08<span class="slash">/</span></div>
+        <h2>Chile<br/><em style="font-style:italic;color:var(--copper);font-weight:500;">Análisis Profundo</em></h2>
+        <div class="sub">Base de operación de IWCC · mercado doméstico, regulación vigente y posición exportadora.</div>
+      </div>
+      <div class="pane-r" style="background: linear-gradient(180deg,#2a1c0e,#5a3818);">
+        <img class="photo" src="photos/winery-aerial.jpeg" alt="" />
+        <div class="veil"></div>
+        <div class="corner-mark">Valparaíso · Pirque · Casablanca</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 10 · CHILE DATOS ============== -->
+  <section data-label="10 Chile Datos">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Chile · Mercado Doméstico y Posición Exportadora</div>
+    </div>
+    <div class="frame" style="padding-top: 140px;">
+      <div class="cap">
+        <div class="eyebrow"><span class="bar"></span>Mercado Doméstico · Posición Exportadora</div>
+        <h1>Chile — <em>base de operación</em> de IWCC</h1>
+      </div>
+
+      <div class="stat-row" style="margin-bottom: 48px;">
+        <div class="stat">
+          <div class="l">Crecimiento NA 2024</div>
+          <div class="k copper">+35,8<span style="font-size:54px;">%</span></div>
+          <div class="v">Ventas vino SA · YoY 2024.</div>
+        </div>
+        <div class="stat">
+          <div class="l">Arancel a China</div>
+          <div class="k">0<span style="font-size:54px;">%</span></div>
+          <div class="v">TLC Chile–China vigente.</div>
+        </div>
+        <div class="stat">
+          <div class="l">Capacidad export IWCC</div>
+          <div class="k">15<span style="font-size:54px;">M</span><span style="font-size:34px; color:var(--slate-soft); margin-left:6px;">L/a</span></div>
+          <div class="v">Volumen anual disponible para exportación.</div>
+        </div>
+        <div class="stat">
+          <div class="l">Regulación NA</div>
+          <div class="k" style="font-size:60px;">Decreto 29</div>
+          <div class="v">Marco vigente · Julio 2024.</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px;">
+        <div>
+          <div class="label">Destinos de Exportación Vino 2024</div>
+          <!-- Donut chart via conic gradient -->
+          <div style="display:flex; gap: 40px; align-items: center; margin-top: 26px;">
+            <div style="width: 280px; height: 280px; flex-shrink:0; border-radius: 50%;
+                        background: conic-gradient(
+                          var(--cream) 0 34%,
+                          var(--copper) 34% 56%,
+                          var(--slate) 56% 74%,
+                          #B5985A 74% 83%,
+                          var(--bad) 83% 93%,
+                          var(--good) 93% 100%);
+                        position: relative;">
+              <div style="position:absolute; inset:60px; background: var(--paper); border-radius:50%;
+                          display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <div class="serif" style="font-size:38px; color:var(--copper); font-weight:600;">2024</div>
+                <div style="font-size:14px; color:var(--slate-soft); letter-spacing:0.2em;">EXPORT</div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 19px;">
+              <div><span class="sw" style="background:var(--cream);"></span> <b>Otros</b> · 34%</div>
+              <div><span class="sw" style="background:var(--copper);"></span> <b>UK</b> · 22%</div>
+              <div><span class="sw" style="background:var(--slate);"></span> <b>USA</b> · 18%</div>
+              <div><span class="sw" style="background:#B5985A;"></span> <b>Canada</b> · 9%</div>
+              <div><span class="sw" style="background:var(--bad);"></span> <b>China</b> · 10%</div>
+              <div><span class="sw" style="background:var(--good);"></span> <b>Brasil</b> · 7%</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="label">Chile Doméstico · Datos Clave</div>
+          <table class="data" style="margin-top: 12px;">
+            <tbody>
+              <tr><td style="width:42%;">Canal retail principal</td><td>Unimarc / Tottus / Jumbo</td></tr>
+              <tr><td>Productor local líder</td><td>Sinzero (0,5% · 2018)</td></tr>
+              <tr><td>Nuevo entrante premium</td><td>Torres Serena 0,0% (SCC · 2025)</td></tr>
+              <tr><td>Índice ventas Vino NA</td><td><b style="color:var(--copper);">+93%</b> &nbsp;<span style="color:var(--slate-soft); font-size:18px;">base 100 = 2021 → 193 en 2024</span></td></tr>
+              <tr class="total"><td>Posición IWCC</td><td class="copper">Sin producto · ventana abierta</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px; font-size: 18px; color: var(--slate-soft); letter-spacing: 0.04em;">
+        Fuentes: El Mostrador Mar 2025 · Wines of Chile 2024 · ODEPA 2025 · SAG Decreto 29/2024 · Vino Joy 2024
+      </div>
+    </div>
+    <div class="foot-row" style="bottom: 32px;"><span>10 · Chile</span><span>Base de operación de IWCC</span></div>
+  </section>
+
+  <!-- ============== 11 · RECOMENDACIÓN ESTRATÉGICA ============== -->
+  <section data-label="11 Recomendación Estratégica">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>09 · Recomendación Estratégica · Decisión de Inversión</div>
+    </div>
+    <div class="frame" style="padding-top: 130px;">
+      <div class="cap" style="margin-bottom: 36px;">
+        <div class="eyebrow"><span class="bar"></span>Opciones A · B · C — Decisión de Inversión</div>
+        <h1>Matriz de Decisión<br/>y <em>Hoja de Ruta</em> 2026–2028+</h1>
+      </div>
+
+      <table class="matriz">
+        <thead>
+          <tr>
+            <th class="crit">Criterio</th>
+            <th>Opción A<br/><span style="font-weight:400;color:var(--slate-soft);">B2B / RO</span></th>
+            <th>Opción B<br/><span style="font-weight:400;color:var(--slate-soft);">BeLight 8,5%</span></th>
+            <th>Opción C<br/><span style="font-weight:400;color:var(--slate-soft);">SCC 0,0%</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="crit">CAPEX requerido</td>     <td class="cell-warn">Medio</td><td class="cell-bad">Alto</td><td class="cell-good">Bajo</td></tr>
+          <tr><td class="crit">Velocidad a mercado</td> <td class="cell-warn">Medio</td><td class="cell-good">Alto</td><td class="cell-bad">Bajo</td></tr>
+          <tr><td class="crit">Riesgo tecnológico</td>  <td class="cell-good">Bajo</td><td class="cell-good">Bajo</td><td class="cell-bad">Alto</td></tr>
+          <tr><td class="crit">Diferenciación</td>      <td class="cell-warn">Medio</td><td class="cell-warn">Medio</td><td class="cell-good">Alto</td></tr>
+          <tr><td class="crit">Fit UK (40%)</td>        <td class="cell-good">Alto</td><td class="cell-good">Alto</td><td class="cell-good">Alto</td></tr>
+          <tr><td class="crit">Fit LATAM hoy</td>       <td class="cell-warn">Medio</td><td class="cell-good">Alto</td><td class="cell-bad">Bajo</td></tr>
+          <tr><td class="crit">Fit China (2028)</td>    <td class="cell-warn">Medio</td><td class="cell-warn">Medio</td><td class="cell-good">Alto</td></tr>
+          <tr><td class="crit">ROI 5 años</td>          <td class="cell-good">Alto</td><td class="cell-good">Alto</td><td class="cell-warn">Medio</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 30px; display:flex; gap: 22px; align-items: center; font-size: 17px; color: var(--slate-soft);">
+        <span><span class="sw" style="background:rgba(47,125,79,0.4); border:1px solid var(--good);"></span> Favorable</span>
+        <span><span class="sw" style="background:rgba(200,148,26,0.4); border:1px solid var(--warn);"></span> Neutral</span>
+        <span><span class="sw" style="background:rgba(180,62,46,0.3); border:1px solid var(--bad);"></span> Desfavorable</span>
+      </div>
+    </div>
+    <div class="foot-row"><span>11 · Matriz de Decisión</span><span>Opciones A · B · C</span></div>
+  </section>
+
+  <!-- ============== 12 · HOJA DE RUTA TIMELINE ============== -->
+  <section data-label="12 Hoja de Ruta" class="cream">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Hoja de Ruta · Chile · UK · Brasil · China</div>
+    </div>
+    <div class="frame" style="padding-top: 150px;">
+      <div class="cap">
+        <div class="eyebrow"><span class="bar"></span>Recomendación</div>
+        <h1 style="font-size:84px;">Piloto <em>B 8,5%</em> &nbsp;→&nbsp; RO Casablanca &nbsp;→&nbsp; <em>LATAM + UK</em> &nbsp;→&nbsp; China + SCC 0,0%</h1>
+      </div>
+
+      <div class="ruta">
+        <div class="ruta-grid">
+          <div class="ruta-step">
+            <div class="when">2026 · Q2</div>
+            <div class="what"><b>Piloto BeLight SB</b><br/>8,5% · Casablanca</div>
+          </div>
+          <div class="ruta-step slate">
+            <div class="when">2026 · Q4</div>
+            <div class="what"><b>Módulo RO</b><br/>Casablanca · ~USD 300K</div>
+          </div>
+          <div class="ruta-step">
+            <div class="when">2027 · Q1</div>
+            <div class="what"><b>Launch 0,5%</b><br/>UK + CL + BR</div>
+          </div>
+          <div class="ruta-step green">
+            <div class="when">2027 · Q3</div>
+            <div class="what"><b>Co-pack</b><br/>Brasil / MX · prueba MX</div>
+          </div>
+          <div class="ruta-step" style="--c: var(--bad);">
+            <div class="when" style="color: var(--bad);">2028+</div>
+            <div class="what"><b>China + SCC 0,0%</b><br/>Premium</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 80px; padding: 28px 36px; background: var(--ink); color: var(--paper); display: flex; gap: 32px; align-items: center;">
+        <div class="pill copper">Recomendación</div>
+        <div style="font-family: var(--serif); font-style: italic; font-size: 32px; line-height: 1.3;">
+          Iniciar con un piloto BeLight 8,5% bajo perfil; capitalizar UK y LATAM; abrir China y SCC 0,0% premium cuando madure la oportunidad.
+        </div>
+      </div>
+    </div>
+    <div class="foot-row"><span>12 · Hoja de Ruta</span><span>2026 → 2028+</span></div>
+  </section>
+
+  <!-- ============== 13 · SECTION 04 · TASACIÓN ============== -->
+  <section data-label="13 Sección Tasación" class="dark">
+    <div class="section-divider">
+      <div class="pane-l">
+        <div class="eyebrow" style="color:var(--copper-tint);"><span class="bar" style="background:var(--copper-tint);"></span>Capítulo 04</div>
+        <div class="big-num" style="color:var(--copper-tint);">04<span class="slash" style="color:rgba(248,244,239,0.18);">/</span></div>
+        <h2 style="color: var(--paper);">Tasación<br/><em style="font-style:italic;color:var(--copper-tint);font-weight:500;">Agrovalora</em></h2>
+        <div class="sub" style="color: rgba(248,244,239,0.7);">Comparativo Agrovalora 1 · 2 (corregida) · Consultek — Viña Indómita Casablanca · 154,29 ha.</div>
+      </div>
+      <div class="pane-r" style="background: linear-gradient(180deg,#2c2218,#1a1410);">
+        <img class="photo" src="photos/pond.jpeg" alt="" />
+        <div class="veil"></div>
+        <div class="corner-mark">Viña Indómita Casablanca · Región de Valparaíso</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 14 · TASACIÓN DETAIL ============== -->
+  <section data-label="14 Tasación Comparativo">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Comparativo Tasaciones · Viña Indómita Casablanca</div>
+    </div>
+    <div class="frame" style="padding-top: 140px;">
+      <div class="cap" style="margin-bottom: 36px;">
+        <div class="eyebrow"><span class="bar"></span>Comparativo · 154,29 ha · Informe AV2 410-2026-DHVR</div>
+        <h1>Tasación <em>Agrovalora</em> &middot; <span style="color: var(--slate-soft);">elaborado 25 / 03 / 2026</span></h1>
+      </div>
+
+      <div class="tas-grid">
+        <div class="tas-card">
+          <div class="label slate" style="color:var(--slate-soft);">Agrovalora 1 · Inicial</div>
+          <div class="name">AV1</div>
+          <div class="total">$16,3<span style="font-size:38px; color:var(--slate-soft); font-weight:500;"> MM USD</span></div>
+          <div class="breakdown">
+            <div class="row"><span>Suelos</span><span>$4,55 MM</span></div>
+            <div class="row"><span>Derechos de agua</span><span>$1,08 MM</span></div>
+            <div class="row"><span>Plantaciones</span><span>$1,16 MM</span></div>
+            <div class="row"><span>Construcciones</span><span>$3,69 MM</span></div>
+            <div class="row"><span>Maquinaria</span><span>$6,68 MM</span></div>
+          </div>
+        </div>
+
+        <div class="tas-card featured">
+          <div class="label">Agrovalora 2 · Corregida</div>
+          <div class="name" style="color: var(--paper);">AV2</div>
+          <div class="total">$19,1<span style="font-size:38px; color:rgba(248,244,239,0.6); font-weight:500;"> MM USD</span></div>
+          <div class="breakdown">
+            <div class="row"><span>Suelos</span><span style="color:var(--paper);">$4,89 MM</span></div>
+            <div class="row"><span>Derechos de agua</span><span style="color:var(--paper);">$1,08 MM</span></div>
+            <div class="row"><span>Plantaciones</span><span style="color:var(--paper);">$1,20 MM</span></div>
+            <div class="row"><span>Construcciones</span><span style="color:var(--paper);">$3,69 MM</span></div>
+            <div class="row"><span>Maquinaria</span><span style="color:var(--paper);">$7,18 MM</span></div>
+          </div>
+          <div class="pill copper" style="align-self: flex-start; margin-top: 10px;">+ $3,5 MM vs Consultek</div>
+        </div>
+
+        <div class="tas-card">
+          <div class="label slate" style="color:var(--slate-soft);">Consultek</div>
+          <div class="name">CK</div>
+          <div class="total">$17,5<span style="font-size:38px; color:var(--slate-soft); font-weight:500;"> MM USD</span></div>
+          <div class="breakdown">
+            <div class="row"><span>Suelos</span><span>$4,96 MM</span></div>
+            <div class="row"><span>Derechos de agua</span><span>$0,90 MM</span></div>
+            <div class="row"><span>Plantaciones</span><span>$0,92 MM</span></div>
+            <div class="row"><span>Construcciones</span><span>$3,87 MM</span></div>
+            <div class="row"><span>Maquinaria</span><span>$6,09 MM</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div style="padding: 22px 26px; background: var(--white); border: 1px solid var(--rule); display:flex; align-items:baseline; gap:18px;">
+          <div class="serif" style="font-size: 58px; font-weight: 600; color: var(--copper); line-height: 1;">6,8</div>
+          <div style="font-size: 17px; color: var(--slate-soft); line-height: 1.3;">l/seg · Pozo Indómita<br/>Cruzat (referencia promedio)</div>
+        </div>
+        <div style="padding: 22px 26px; background: var(--white); border: 1px solid var(--rule); display:flex; align-items:baseline; gap:18px;">
+          <div class="serif" style="font-size: 58px; font-weight: 600; color: var(--copper); line-height: 1;">25,8</div>
+          <div style="font-size: 17px; color: var(--slate-soft); line-height: 1.3;">l/seg · agregado pozos<br/>W. Cole (Martín L.)</div>
+        </div>
+        <div style="padding: 22px 26px; background: var(--white); border: 1px solid var(--rule); display:flex; align-items:baseline; gap:18px;">
+          <div class="serif" style="font-size: 58px; font-weight: 600; color: var(--copper); line-height: 1;">58,8</div>
+          <div style="font-size: 17px; color: var(--slate-soft); line-height: 1.3;">l/seg · Pozos #1 + #6 + #7<br/>Indómita (Diego C.)</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-row"><span>14 · Tasación</span><span>Casablanca · 154,29 ha · 25 / 03 / 2026</span></div>
+  </section>
+
+  <!-- ============== 15 · SECTION 05 · MÓVIL COSTO VINO ============== -->
+  <section data-label="15 Sección Móvil Costo Vino">
+    <div class="section-divider">
+      <div class="pane-l" style="background: var(--paper);">
+        <div class="eyebrow"><span class="bar"></span>Capítulo 05</div>
+        <div class="big-num">05<span class="slash">/</span></div>
+        <h2>Móvil<br/><em style="font-style:italic;color:var(--copper);font-weight:500;">Costo Vino</em></h2>
+        <div class="sub">Prioridades 2026 · Estado y responsables.</div>
+      </div>
+      <div class="pane-r" style="background: linear-gradient(180deg,#3a1a14,#1a1410);">
+        <img class="photo" src="photos/tanks.jpeg" alt="" />
+        <div class="veil"></div>
+        <div class="corner-mark">Inventario · Demanda · Costos</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 16 · BIG STAT EXCESO ============== -->
+  <section data-label="16 Móvil Granel Marzo">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Móvil Vino Granel · Marzo 2026</div>
+    </div>
+    <div class="frame" style="padding-top: 150px;">
+      <div class="cap" style="margin-bottom: 30px;">
+        <div class="eyebrow"><span class="bar"></span>Política de Inventario · Vino Granel</div>
+        <h1>Inventario sobre <em>Demanda</em></h1>
+      </div>
+
+      <div class="megastat">
+        <div class="k">38,5<em>%</em></div>
+        <div class="v">de inventario sobre la demanda — equivalente a <b style="color: var(--copper); font-weight: 600;">126K Litros</b> en exceso, sin considerar las Borras.</div>
+        <div style="display: flex; gap: 28px; margin-top: 10px;">
+          <div class="pill ink">Móvil Marzo 2026</div>
+          <div class="pill outline">Excesos concentrados en niveles B · A · D</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-row"><span>16 · Exceso de Inventario</span><span>Móvil Vino Granel Marzo</span></div>
+  </section>
+
+  <!-- ============== 17 · MÓVIL VINO GRANEL TABLA ============== -->
+  <section data-label="17 Móvil Granel Tabla">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Móvil Vino Granel · Política de Inventario</div>
+    </div>
+    <div class="frame" style="padding-top: 120px; padding-bottom: 130px;">
+      <div class="cap" style="margin-bottom: 18px;">
+        <div class="eyebrow"><span class="bar"></span>Política de Inventario · Detalle por Nivel</div>
+        <h1 style="font-size: 56px;">Móvil Marzo — <em>Detalle</em> Vino Granel</h1>
+      </div>
+
+      <table class="data" style="font-size: 16px;">
+        <thead>
+          <tr>
+            <th style="width:9%;">Nivel</th>
+            <th style="width:11%;">Tipo</th>
+            <th class="num" style="text-align:right; width:13%;">PPTO 2026<br/>(cjs 9 Lt)</th>
+            <th class="num" style="text-align:right;">Demanda<br/>prom. mes (Lt)</th>
+            <th class="num" style="text-align:right;">Política Dic.<br/>(meses)</th>
+            <th class="num" style="text-align:right;">Política Dic.<br/>(Litros)</th>
+            <th class="num" style="text-align:right;">Inv. Proy.<br/>Móvil Mar. (Lt)</th>
+            <th class="num" style="text-align:right;">Exceso<br/>(Litros)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>AAA</td><td>T</td><td class="num">5.092</td><td class="num">3.819</td><td class="num">12</td><td class="num">45.825</td><td class="num">54.418</td><td class="num copper">+8.593</td></tr>
+          <tr><td>AAA</td><td>B</td><td class="num">421</td><td class="num">316</td><td class="num">12</td><td class="num">3.790</td><td class="num">4.058</td><td class="num copper">+268</td></tr>
+          <tr><td>AA</td><td>T</td><td class="num">22.417</td><td class="num">16.813</td><td class="num">12</td><td class="num">201.751</td><td class="num">192.090</td><td class="num" style="color: var(--good);">−9.661</td></tr>
+          <tr><td>AA</td><td>B</td><td class="num">7.140</td><td class="num">5.355</td><td class="num">10</td><td class="num">53.550</td><td class="num">24.044</td><td class="num" style="color: var(--good);">−29.506</td></tr>
+          <tr><td>A</td><td>T</td><td class="num">254.821</td><td class="num">191.116</td><td class="num">8</td><td class="num">1.528.929</td><td class="num">1.061.907</td><td class="num" style="color: var(--good);">−467.022</td></tr>
+          <tr><td>A</td><td>B</td><td class="num">105.856</td><td class="num">79.392</td><td class="num">7</td><td class="num">555.742</td><td class="num">905.390</td><td class="num copper">+349.648</td></tr>
+          <tr><td>A</td><td>SPK</td><td class="num">14.239</td><td class="num">10.679</td><td class="num">6</td><td class="num">64.076</td><td class="num">133.924</td><td class="num copper">+69.848</td></tr>
+          <tr><td>B</td><td>T</td><td class="num">150.050</td><td class="num">112.538</td><td class="num">7</td><td class="num">787.763</td><td class="num">1.256.717</td><td class="num copper">+468.954</td></tr>
+          <tr><td>B</td><td>B</td><td class="num">158.129</td><td class="num">118.597</td><td class="num">6</td><td class="num">711.579</td><td class="num">934.055</td><td class="num copper">+222.476</td></tr>
+          <tr><td>C</td><td>T</td><td class="num">455.474</td><td class="num">341.606</td><td class="num">2</td><td class="num">683.211</td><td class="num">368.125</td><td class="num" style="color: var(--good);">−315.087</td></tr>
+          <tr><td>C</td><td>B</td><td class="num">349.960</td><td class="num">262.470</td><td class="num">2</td><td class="num">524.940</td><td class="num">262.630</td><td class="num" style="color: var(--good);">−262.311</td></tr>
+          <tr><td>D</td><td>B / AVI</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">127.836</td><td class="num copper">+127.836</td></tr>
+          <tr><td>Borras / Vendimia</td><td>—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">613.089</td><td class="num copper">+613.089</td></tr>
+          <tr class="total"><td>Total</td><td>—</td><td class="num">1.536.145</td><td class="num">1.152.109</td><td class="num">—</td><td class="num">5.198.794</td><td class="num">5.938.282</td><td class="num copper">+739.487</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 18px; display:flex; gap: 30px; align-items: center; font-size: 17px; color: var(--slate-soft);">
+        <span><span class="sw" style="background: var(--copper);"></span> Exceso</span>
+        <span><span class="sw" style="background: var(--good);"></span> Déficit</span>
+        <span style="margin-left: auto;">% Venta · Política <b style="color:var(--ink);">37,6%</b> · Móvil <b style="color:var(--ink);">43,0%</b></span>
+      </div>
+    </div>
+    <div class="foot-row"><span>17 · Detalle Granel</span><span>38,5% sobre demanda · 126K Lt en exceso</span></div>
+  </section>
+
+  <!-- ============== 18 · INICIATIVAS VINO 2026 ============== -->
+  <section data-label="18 Iniciativas Vino 2026" class="cream">
+    <div class="brand-row">
+      <div class="iwcc">IWCC<small>WINE COMPANY CHILE</small></div>
+      <div>Iniciativas Vino 2026</div>
+    </div>
+    <div class="frame" style="padding-top: 140px;">
+      <div class="cap">
+        <div class="eyebrow"><span class="bar"></span>Plan de Ahorro · Enología</div>
+        <h1>Iniciativas <em>Vino 2026</em></h1>
+        <div class="lede">Ahorro solicitado <b style="color: var(--ink);">MM$ 300 CLP</b> · estado y responsables por iniciativa.</div>
+      </div>
+
+      <div class="ini-grid">
+        <div class="ini">
+          <div class="top">
+            <h3>Baja Precio<br/>Móvil Marzo</h3>
+            <div class="num">01</div>
+          </div>
+          <ul>
+            <li>Baja en precios de compra · <b>MM$ 130</b></li>
+            <li>Variación mezclas CH y RI · <b>MM$ 90</b></li>
+          </ul>
+          <div class="meta">
+            <span>Responsable · <b>EG / MQ</b></span>
+            <span class="pill good"><span class="dot"></span>Realizado</span>
+          </div>
+        </div>
+
+        <div class="ini">
+          <div class="top">
+            <h3>Cambio Proveedor<br/>de Gases</h3>
+            <div class="num">02</div>
+          </div>
+          <ul>
+            <li>Ahorro potencial · <b>MM$ 70 – 80</b></li>
+            <li>Ya aprobado como proveedor BRC</li>
+            <li>Cambio en Indómita y Abril Santa Alicia</li>
+          </ul>
+          <div class="meta">
+            <span>Responsable · <b>EG / MG</b></span>
+            <span class="pill warn"><span class="dot"></span>En curso · retrasado</span>
+          </div>
+        </div>
+
+        <div class="ini">
+          <div class="top">
+            <h3>Cambio<br/>Vinos LATAM</h3>
+            <div class="num">03</div>
+          </div>
+          <ul>
+            <li>Incorporación de mosto · mezcla más económica en blancos</li>
+            <li>16% demanda es blanco · en Brasil no se puede por legislación</li>
+            <li>Riesgos en filtración e inocuidad microbiológica</li>
+          </ul>
+          <div class="meta">
+            <span>Responsable · <b>EG</b></span>
+            <span class="pill bad"><span class="dot"></span>Pendiente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-row"><span>18 · Iniciativas</span><span>Ahorro solicitado MM$ 300</span></div>
+  </section>
+
+  <!-- ============== 19 · SECTION VARIOS ============== -->
+  <section data-label="19 Sección Varios" class="dark">
+    <div class="section-divider">
+      <div class="pane-l">
+        <div class="eyebrow" style="color:var(--copper-tint);"><span class="bar" style="background:var(--copper-tint);"></span>Capítulo 09</div>
+        <div class="big-num" style="color:var(--copper-tint);">09<span class="slash" style="color:rgba(248,244,239,0.18);">/</span></div>
+        <h2 style="color: var(--paper);">Varios</h2>
+        <div class="sub" style="color: rgba(248,244,239,0.7);">Temas adicionales · agenda abierta para discusión final.</div>
+      </div>
+      <div class="pane-r" style="background: linear-gradient(180deg, #2a1c0e, #1a1410);">
+        <img class="photo" src="photos/fog.jpeg" alt="" />
+        <div class="veil"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 20 · CLOSING ============== -->
+  <section data-label="20 Cierre" class="dark">
+    <div class="end-grid">
+      <div class="end-pane" style="background: var(--ink); justify-content: space-between;">
+        <div class="iwcc-mark" style="color: var(--paper);">
+          <span class="big">IWCC</span>
+          <small>WINE COMPANY CHILE</small>
+        </div>
+
+        <h1 style="color: var(--paper);"><em>Gracias</em>.</h1>
+
+        <div style="color: rgba(248,244,239,0.7); font-size: 22px; letter-spacing: 0.05em; line-height: 1.5;">
+          Indómita Wine Company Chile<br/>
+          Área Técnica &nbsp;·&nbsp; Gerencia de Operaciones &nbsp;·&nbsp; 2026
+        </div>
+      </div>
+      <div class="end-pane" style="background: var(--copper); justify-content: center; align-items: flex-start;">
+        <div class="label" style="color: rgba(255,255,255,0.8);">Próximos pasos</div>
+        <div style="font-family: var(--serif); font-size: 56px; line-height: 1.1; color: var(--paper); font-weight: 500;">
+          Cerrar acuerdos<br/>
+          de la <em>reunión</em>,<br/>
+          asignar dueños y<br/>
+          calendarizar el<br/>
+          seguimiento.
+        </div>
+        <div style="margin-top: 24px; color: rgba(255,255,255,0.85); font-size: 22px;">
+          Casablanca · Pirque · 21 Abril 2026
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+</body>
+</html>
