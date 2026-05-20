@@ -1,0 +1,16 @@
+{
+  "name": "iwcc",
+  "owner": {
+    "name": "Eduardo Gajardo"
+  },
+  "metadata": {
+    "description": "Marketplace de plugins IWCC (Wine Company Chile)."
+  },
+  "plugins": [
+    {
+      "name": "iwcc-presentaciones",
+      "source": "./",
+      "description": "Template y skill para presentaciones editoriales IWCC."
+    }
+  ]
+}

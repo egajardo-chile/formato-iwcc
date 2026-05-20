@@ -1,0 +1,8 @@
+{
+  "name": "iwcc-presentaciones",
+  "version": "1.0.0",
+  "description": "Template y skill para generar presentaciones editoriales IWCC (Wine Company Chile): deck HTML 1920x1080, paleta cobre/crema/tinta, tipografia Cormorant Garamond + IBM Plex.",
+  "author": {
+    "name": "Eduardo Gajardo"
+  }
+}
